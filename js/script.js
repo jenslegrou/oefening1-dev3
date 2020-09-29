@@ -1,11 +1,12 @@
 import Vector from './classes/Vector.js';
 import Particle from './classes/Particle.js';
+import {random} from '../functions/lib.js' ;
 
 const $canvas = document.querySelector(`.canvas`),
   ctx = $canvas.getContext(`2d`),
   mouse = new Vector(0, 0);
-  
-let particles = [];
+
+  let particles = [];
 
 const init = () => {
   // mouse = new Vector(canvas.width / 2, canvas.height / 2);
@@ -23,9 +24,9 @@ const draw = () => {
   ctx.fillStyle = `black`;
   ctx.fillRect(0, 0, $canvas.width, $canvas.height);
   
-  const particle = new Particle(Math.random()*$canvas.width);
-  particles.push(particle);
-  particles.forEach(particle => {particle.draw(ctx);});
+	particles.push(new Particle(Math.random()* $canvas.width, 0));
+  particles.forEach(particle => particle.draw(ctx));
+  particles = particles.filter(particle => particle.isAlive);
   
   console.log(mouse.x, mouse.y);
 
